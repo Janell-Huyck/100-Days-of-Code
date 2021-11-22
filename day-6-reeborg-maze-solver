@@ -1,0 +1,30 @@
+counter = 0 
+
+def turn_right():
+    turn_left()
+    turn_left()
+    turn_left()
+                      
+def move_if_clear():
+    global counter
+    if front_is_clear():
+        move()
+    if counter > 4:
+        counter = 0
+        move_if_clear()
+      
+while not at_goal():  
+    global counter
+    if wall_on_right() and front_is_clear():
+        counter = 0
+        move_if_clear()
+    elif wall_in_front() and right_is_clear():
+        counter += 1
+        turn_right()
+        move_if_clear()
+    elif front_is_clear() and right_is_clear():
+        counter += 1
+        turn_right()
+        move_if_clear()
+    else:
+        turn_left()
